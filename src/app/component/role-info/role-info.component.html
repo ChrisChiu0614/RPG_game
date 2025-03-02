@@ -1,0 +1,68 @@
+<div class="container role-info">
+  <div class="row justify-content-center align-items-stretch">
+    <!-- 左側：角色資訊 -->
+    <div class="col-md-6 d-flex flex-column">
+      <div class="role-card flex-grow-1">
+        <h2 class="text-center">人物資訊</h2>
+
+        <div class="form-group">
+          <p><strong>名稱：</strong> {{ character.name }}</p>
+        </div>
+        <div class="form-group">
+          <p><strong>職業：</strong> {{ character.job }}</p>
+        </div>
+        <div class="form-group">
+          <p><strong>等級：</strong> {{ character.level }}</p>
+        </div>
+        <div class="form-group">
+          <p><strong>經驗值：</strong> {{ character.exp }} / {{ character.nextExp }}</p>
+        </div>
+        <div class="form-group">
+          <p><strong>金幣：</strong> {{ character.gold }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 右側：角色圖片 + 能力屬性 -->
+    <div class="col-md-6 d-flex flex-column">
+      <div class="character-image text-center">
+        <img src="assets/roleImg/role.png" alt="角色圖片" class="role-img img-fluid">
+      </div>
+      <div class="role-card flex-grow-1">
+        <h5 class="text-center">能力值</h5>
+        <p><strong>力量 (STR)：</strong> {{ character.str }}</p>
+        <p><strong>敏捷 (AGI)：</strong> {{ character.agi }}</p>
+        <p><strong>體力 (VIT)：</strong> {{ character.vit }}</p>
+        <p><strong>靈巧 (DEX)：</strong> {{ character.dex }}</p>
+        <p><strong>幸運 (LUK)：</strong> {{ character.luk }}</p>
+        <p><strong>智力 (INT)：</strong> {{ character.int }}</p> <!-- ✅ 顯示 INT -->
+      </div>
+    </div>
+  </div>
+  <br>
+  <!-- 底部顯示基礎屬性 -->
+  <div class="row">
+    <div class="col-md-12 d-flex justify-content-center">
+      <div class="role-card">
+        <h5 class="text-center">基礎屬性</h5>
+        <p><strong>HP：</strong> {{ character.hp }} / {{ character.maxHp }}</p>
+        <p><strong>MP：</strong> {{ character.mana }} / {{ character.maxMana }}</p> <!-- ✅ 顯示 MP -->
+        <p><strong>攻擊力：</strong> {{ character.attack }}</p>
+        <p><strong>防禦力：</strong> {{ character.defense }}</p>
+        <p><strong>迴避值：</strong> {{ character.evasion }}</p>
+        <p><strong>爆擊率：</strong> {{ character.critRate }}</p>
+        <p><strong>幸運：</strong> {{ character.luck }}</p>
+      </div>
+    </div>
+  </div>
+  <br>
+  <!-- 經驗測試按鈕 -->
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <button class="btn btn-success btn-block" (click)="gainExp()">獲取經驗值</button>
+    </div>
+    <div class="form-group" *ngIf="character.statPoints > 0">
+      <button class="btn btn-warning btn-block" (click)="allocateStats()">分配點數</button>
+    </div>
+  </div>
+</div>

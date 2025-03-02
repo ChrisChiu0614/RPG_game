@@ -1,0 +1,33 @@
+<div class="shop-container">
+  <h2>商店</h2>
+
+  <!-- 類別選單 -->
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="selectedCategory === 'weapon'" (click)="setCategory('weapon')">武器</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="selectedCategory === 'armor'" (click)="setCategory('armor')">防具</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="selectedCategory === 'potion'" (click)="setCategory('potion')">藥水</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="selectedCategory === 'skillbook'" (click)="setCategory('skillbook')">技能書</a>
+    </li>
+  </ul>
+
+<!-- 物品列表 -->
+<div class="shop-items">
+  <div *ngFor="let item of filteredItems">
+    <div class="shop-item">
+      <img [src]="'assets/icons/' + (item.icon ? item.icon : 'default.png')" class="item-icon">
+      <div class="item-info">
+        <p><strong>{{ item.name }}</strong> - {{ item.description }}</p>
+        <p>價格: {{ item.price }} 金幣</p>
+        <button class="btn btn-warning btn-sm" (click)="buyItem(item)">購買</button>
+      </div>
+    </div>
+  </div>
+</div>
+

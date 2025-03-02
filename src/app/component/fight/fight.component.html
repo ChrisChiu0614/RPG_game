@@ -1,0 +1,79 @@
+<div class="fight-container">
+  <div class="fight-background">
+    <img [src]="background" class="fight-bg">
+    <img [src]="'assets/monsters/' + monster.image" class="monster">
+  </div>
+
+  <h2>戰鬥</h2>
+
+<!-- 敵人血條 -->
+<div class="enemy-status">
+  <h4>{{ monster.name }}</h4>
+
+  <div class="health-bar">
+    <div class="health-fill"
+         [style.width.%]="(monster.hp <= 0 ? 0 : (monster.hp / monster.maxHp) * 100)">
+    </div>
+  </div>
+
+  <p>{{ monster.hp <= 0 ? 0 : monster.hp }} / {{ monster.maxHp }}</p>
+</div>
+
+
+  <!-- 主角血條 & 魔力條 -->
+  <div class="player-status">
+    <h4>{{ character.name }}</h4>
+
+    <div class="health-bar">
+      <div class="health-fill" style="background-color: #4CAF50;" [style.width.%]="(character.hp / character.maxHp) * 100"></div>
+    </div>
+    <p>HP: {{ character.hp }} / {{ character.maxHp }}</p>
+
+    <div class="mana-bar">
+      <div class="mana-fill" [style.width.%]="(character.mana / character.maxMana) * 100"></div>
+    </div>
+    <p>MP: {{ character.mana }} / {{ character.maxMana }}</p>
+  </div>
+
+  <!-- ⚔️ 開始戰鬥按鈕（僅初次進入顯示） -->
+  <div *ngIf="!isFighting && !isDead && battleLog.length === 0">
+    <button class="btn btn-primary btn-block" (click)="startBattle()">開始戰鬥</button>
+  </div>
+
+  <!-- ⚔️ 戰鬥進行中 -->
+  <div *ngIf="isFighting && !isDead">
+    <button class="btn btn-danger btn-block" (click)="attack()">普通攻擊</button>
+  </div>
+
+  <!-- 選擇技能按鈕 -->
+<div *ngIf="isFighting && !isDead">
+  <div class="skill-list">
+    <button *ngFor="let skill of character.skills"
+            class="btn btn-info btn-sm"
+            [disabled]="character.mana < skill.mpCost"
+            (click)="useSkill(skill)">
+      {{ skill.name }} (MP: {{ skill.mpCost }})
+    </button>
+  </div>
+</div>
+
+  <!-- 🏆 勝利後，顯示「下一場戰鬥」 -->
+  <div *ngIf="!isFighting && !isDead && battleLog.length > 0">
+    <p>戰鬥結束，你獲勝了！</p>
+    <button class="btn btn-primary btn-block" (click)="startNewBattle()">下一場戰鬥</button>
+  </div>
+
+  <!-- 💀 角色死亡 -->
+  <div *ngIf="isDead">
+    <p>你被打敗了...</p>
+    <button class="btn btn-success btn-block" (click)="revive()">復活</button>
+  </div>
+
+  <!-- 📝 戰鬥紀錄 -->
+  <div class="battle-log">
+    <h3>戰鬥紀錄</h3>
+    <ul>
+      <li *ngFor="let log of battleLog">{{ log }}</li>
+    </ul>
+  </div>
+</div>

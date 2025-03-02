@@ -1,0 +1,10 @@
+<div class="inventory-container">
+  <h2>背包</h2>
+  <ul>
+    <li *ngFor="let item of character.inventory">
+      <span>{{ item.name }} - {{ item.description }}</span>
+      <button *ngIf="item.type === 'potion'" class="btn btn-success btn-sm" (click)="useItem(item)">使用</button>
+      <button *ngIf="item.type === 'weapon' || item.type === 'armor'" class="btn btn-primary btn-sm" (click)="equipItem(item)">裝備</button>
+    </li>
+  </ul>
+</div>

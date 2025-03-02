@@ -1,0 +1,40 @@
+<div class="container allocate-stats">
+  <div class="row justify-content-center">
+    <div class="col-md-8 role-card">
+      <h2 class="text-center">分配能力點數</h2>
+      <p class="text-center"><strong>剩餘點數：</strong> <span class="stat-points">{{ character.statPoints }}</span></p>
+
+      <div class="form-group stat-group" *ngFor="let stat of stats">
+        <label><strong>{{ stat.toUpperCase() }}</strong></label>
+        <div class="input-group">
+          <button class="btn btn-sm btn-outline-secondary stat-btn" (click)="adjustStat(stat, -1)"
+                  [disabled]="character[stat] <= originalStats[stat]">-</button>
+          <span class="stat-value">{{ character[stat] }}</span>
+          <button class="btn btn-sm btn-outline-primary stat-btn" (click)="adjustStat(stat, 1)"
+                  [disabled]="character.statPoints <= 0">+</button>
+        </div>
+      </div>
+
+      <!-- 底部顯示基礎屬性 (即時更新) -->
+      <div class="row">
+        <div class="col-md-12 d-flex justify-content-center">
+          <div class="role-card">
+            <h5 class="text-center">基礎屬性</h5>
+            <p><strong>HP：</strong> {{ character.hp }} / {{ character.maxHp }}</p>
+            <p><strong>MP：</strong> {{ character.mana }} / {{ character.maxMana }}</p> <!-- ✅ 顯示 MP -->
+            <p><strong>攻擊力：</strong> {{ character.attack }}</p>
+            <p><strong>防禦力：</strong> {{ character.defense }}</p>
+            <p><strong>迴避值：</strong> {{ character.evasion }}</p>
+            <p><strong>爆擊率：</strong> {{ character.critRate }}</p>
+            <p><strong>幸運：</strong> {{ character.luck }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <button class="btn btn-success btn-lg" (click)="confirmAllocation()">確定</button>
+        <button class="btn btn-danger btn-lg" (click)="cancelAllocation()">取消</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="game-container">
+  <div class="main-content">
+    <div class="sidebar">
+      <button class="btn btn-primary btn-block" (click)="setComponent('roleInfo')">人物</button>
+      <button class="btn btn-primary btn-block" (click)="setComponent('inventory')">背包</button>
+      <button class="btn btn-primary btn-block" (click)="setComponent('shop')">商店</button>
+      <button class="btn btn-primary btn-block" (click)="setComponent('fight')">戰鬥</button>
+    </div>
+
+   <div class="content">
+      <ng-container *ngIf="selectedComponent === 'roleInfo'">
+        <app-role-info></app-role-info>
+      </ng-container>
+      <ng-container *ngIf="selectedComponent === 'fight'">
+        <app-fight></app-fight>
+      </ng-container>
+      <ng-container *ngIf="selectedComponent === 'inventory'">
+        <app-inventory></app-inventory>
+      </ng-container>
+      <ng-container *ngIf="selectedComponent === 'shop'">
+        <app-shop></app-shop>
+      </ng-container>
+
+    </div>
+  </div>
+</div>
+
+<!-- 讓 `GameComponent` 可以載入子元件 -->
+<router-outlet></router-outlet>

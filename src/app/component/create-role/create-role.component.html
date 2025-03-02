@@ -1,0 +1,57 @@
+<div class="container role-creation">
+  <div class="row justify-content-center align-items-stretch">
+    <!-- 左側：角色創建與能力分配 -->
+    <div class="col-md-6 d-flex flex-column">
+      <div class="role-card flex-grow-1">
+        <div class="form-group">
+          <label for="name">名稱</label>
+          <input type="text" id="name" class="form-control" [(ngModel)]="character.name">
+        </div>
+        <div class="form-group">
+          <label for="job">職業</label>
+          <input type="text" id="job" class="form-control" [(ngModel)]="character.job">
+        </div>
+        <div class="form-group">
+          <label>剩餘能力點數: <strong>{{ character.statPoints }}</strong></label>
+        </div>
+
+        <!-- 能力值分配 -->
+        <div class="form-group stat-group" *ngFor="let stat of stats">
+          <label>{{ stat.toUpperCase() }}</label>
+          <div class="input-group">
+            <button class="btn btn-sm btn-outline-secondary stat-btn" (click)="adjustStat(stat, -1)"
+              [disabled]="character[stat] <= 5">-</button>
+            <span class="stat-value">{{ character[stat] }}</span>
+            <button class="btn btn-sm btn-outline-primary stat-btn" (click)="adjustStat(stat, 1)"
+              [disabled]="character.statPoints <= 0">+</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 右側：人物圖片 + 基礎屬性顯示 -->
+    <div class="col-md-6 d-flex flex-column">
+      <div class="character-image text-center">
+        <img src="assets/roleImg/role.png" alt="角色圖片" class="role-img img-fluid">
+      </div>
+      <div class="role-card flex-grow-1">
+        <h5 class="text-center">基礎屬性</h5>
+        <p><strong>HP：</strong> {{ character.maxHp }}</p>
+        <p><strong>MP：</strong> {{ character.maxMana }}</p>
+        <p><strong>攻擊：</strong> {{ character.attack }}</p>
+        <p><strong>防禦：</strong> {{ character.defense }}</p>
+        <p><strong>迴避：</strong> {{ character.evasion }}</p>
+        <p><strong>爆擊：</strong> {{ character.critRate }}</p>
+        <p><strong>幸運：</strong> {{ character.luck }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 確定按鈕 -->
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <button class="btn btn-primary confirm-btn" (click)="confirmCharacter()">確定</button>
+    </div>
+  </div>
+</div>

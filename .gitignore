@@ -1,0 +1,23 @@
+# Node.js 相關
+node_modules/
+dist/
+out/
+coverage/
+temp/
+*.log
+*.cache
+*.lock
+
+# Angular 相關
+.angular/
+.idea/
+.vscode/
+*.bak
+*.swp
+.DS_Store
+
+# TypeScript 相關
+*.tsbuildinfo
+
+# Git 相關
+.git/
