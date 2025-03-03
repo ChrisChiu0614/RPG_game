@@ -86,7 +86,7 @@ export class Character {
     this.attack = 10 + this.str * 2;  // 物理攻擊 = 10 + STR * 2
     this.defense = this.vit;  // 防禦值 = VIT
     this.evasion = this.agi;  // 迴避值 = AGI
-    this.critRate = this.dex;  // 爆擊值 = DEX
+    this.critRate = 5 + this.dex * 1;  // 爆擊值 = DEX
     this.luck = this.luk * 0.5;  // 幸運值 = LUK * 0.5
   }
 
@@ -121,29 +121,29 @@ export class Character {
     return Object.assign(new Character(), json);
   }
 
-    /** ✅ 加入道具到背包 */
-    addItem(item: Item) {
-      this.inventory.push(item);
-    }
+  /** ✅ 加入道具到背包 */
+  addItem(item: Item) {
+    this.inventory.push(item);
+  }
 
-    /** ✅ 使用道具 */
-    useItem(item: Item) {
-      if (item.type === 'potion') {
-        this.hp = Math.min(this.hp + item.effect, this.maxHp);
-        this.inventory = this.inventory.filter(i => i !== item);
-      }
+  /** ✅ 使用道具 */
+  useItem(item: Item) {
+    if (item.type === 'potion') {
+      this.hp = Math.min(this.hp + item.effect, this.maxHp);
+      this.inventory = this.inventory.filter(i => i !== item);
     }
+  }
 
-    /** ✅ 裝備武器/防具 */
-    equipItem(item: Item) {
-      if (item.type === 'weapon') {
-        this.equippedWeapon = item;
-        this.attack += item.effect;
-      } else if (item.type === 'armor') {
-        this.equippedArmor = item;
-        this.defense += item.effect;
-      }
+  /** ✅ 裝備武器/防具 */
+  equipItem(item: Item) {
+    if (item.type === 'weapon') {
+      this.equippedWeapon = item;
+      this.attack += item.effect;
+    } else if (item.type === 'armor') {
+      this.equippedArmor = item;
+      this.defense += item.effect;
     }
+  }
 
 
 
