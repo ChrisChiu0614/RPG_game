@@ -21,3 +21,6 @@ temp/
 
 # Git 相關
 .git/
+angular.json
+package-lock.json
+angular.json

@@ -27,7 +27,7 @@ export class RoleInfoComponent implements OnInit{
 
    /** ✅ 測試：按按鈕給角色增加經驗值 */
    gainExp() {
-    this.character.addExp(50); // 測試增加 50 經驗值
+    this.character.addExp(100); // 測試增加 100 經驗值
     this.saveCharacter(); // 保存更新後的角色數據
   }
 

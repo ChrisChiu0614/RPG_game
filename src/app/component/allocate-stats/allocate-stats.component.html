@@ -10,8 +10,37 @@
           <button class="btn btn-sm btn-outline-secondary stat-btn" (click)="adjustStat(stat, -1)"
                   [disabled]="character[stat] <= originalStats[stat]">-</button>
           <span class="stat-value">{{ character[stat] }}</span>
-          <button class="btn btn-sm btn-outline-primary stat-btn" (click)="adjustStat(stat, 1)"
-                  [disabled]="character.statPoints <= 0">+</button>
+          <!-- <button class="btn btn-sm btn-outline-primary stat-btn" (click)="adjustStat(stat, 1)"
+                  [disabled]="character.statPoints <= 0">+</button> -->
+                  <div class="stat-group">
+                    <label><strong>{{ stat.toUpperCase() }}</strong></label>
+                    <div class="input-group">
+                      <!-- 減點按鈕 -->
+                      <div class="btn-group">
+                        <button *ngFor="let value of [-1, -5, -10]" 
+                                class="btn btn-sm btn-outline-secondary stat-btn" 
+                                (click)="adjustStat(stat, value)"
+                                [disabled]="character[stat] + value < originalStats[stat]">
+                          {{ value }}
+                        </button>
+                      </div>
+                  
+                      <!-- 顯示當前屬性值 -->
+                      <span class="stat-value">{{ character[stat] }}</span>
+                  
+                      <!-- 加點按鈕 -->
+                      <div class="btn-group">
+                        <button *ngFor="let value of [1, 5, 10]" 
+                                class="btn btn-sm btn-outline-primary stat-btn" 
+                                (click)="adjustStat(stat, value)"
+                                [disabled]="character.statPoints < value">
+                          +{{ value }}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  
         </div>
       </div>
 

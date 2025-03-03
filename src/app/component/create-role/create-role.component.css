@@ -1,18 +1,22 @@
-/* 保持 row 內部的 col-md-6 高度一致 */
+/* 讓 row 內部的 col-md-6 高度一致 */
 .row {
   display: flex;
-  align-items: stretch; /* 讓所有子元素高度一致 */
+  flex-wrap: wrap; /* ✅ 防止小螢幕時強制兩欄併排 */
+  align-items: stretch; /* ✅ 讓所有子元素高度一致 */
+  gap: 15px; /* ✅ 在小螢幕上避免過於擁擠 */
 }
 
 /* 確保左右區塊高度一致 */
 .col-md-6 {
   display: flex;
   flex-direction: column;
+  flex: 1; /* ✅ 讓兩邊欄位均分，防止某邊過窄 */
+  min-width: 300px; /* ✅ 避免手機版太窄 */
 }
 
 /* 讓 role-card 佔滿 col-md-6，使其左右對齊 */
 .role-card {
-  flex-grow: 1; /* 讓兩邊的卡片高度一致 */
+  flex-grow: 1; /* ✅ 讓兩邊的卡片高度一致 */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -20,6 +24,13 @@
   background: #f8f9fa;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 📌 小螢幕（平板 & 手機）時，確保 col-md-6 變成單欄 */
+@media (max-width: 768px) {
+  .row {
+    flex-direction: column;
+  }
 }
 
 /* 角色圖片區塊 */
@@ -44,12 +55,21 @@
   margin-bottom: 10px;
 }
 
+/* 📌 小螢幕時讓 `stat-group` 變成直排 */
+@media (max-width: 480px) {
+  .stat-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
 .stat-value {
   min-width: 40px;
   text-align: center;
   font-weight: bold;
 }
 
+/* 📌 讓按鈕尺寸更適合手機 */
 .stat-btn {
   width: 30px;
   height: 30px;
@@ -58,9 +78,27 @@
   justify-content: center;
 }
 
+/* 📌 手機版按鈕優化 */
+@media (max-width: 480px) {
+  .stat-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 14px;
+  }
+}
+
 /* 確定按鈕 */
 .confirm-btn {
   margin-top: 20px;
   padding: 10px 30px;
   font-size: 16px;
+  width: 100%; /* ✅ 讓按鈕在小螢幕佔滿整行 */
+}
+
+/* 📌 手機版按鈕全寬 */
+@media (max-width: 480px) {
+  .confirm-btn {
+    font-size: 14px;
+    padding: 12px;
+  }
 }

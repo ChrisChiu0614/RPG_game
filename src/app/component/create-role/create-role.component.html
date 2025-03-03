@@ -9,7 +9,9 @@
         </div>
         <div class="form-group">
           <label for="job">職業</label>
-          <input type="text" id="job" class="form-control" [(ngModel)]="character.job">
+          <select id="job" class="form-control" [(ngModel)]="character.job" (change)="onJobChange()">
+            <option *ngFor="let job of availableJobs" [value]="job.name">{{ job.name }}</option>
+          </select>
         </div>
         <div class="form-group">
           <label>剩餘能力點數: <strong>{{ character.statPoints }}</strong></label>
